@@ -1,0 +1,67 @@
+<?php 
+
+	class Produk{
+
+		public  $judul,
+				$penulis,
+				$penerbit,
+				$harga,
+				$jmlhalaman,
+				$waktumain;
+
+		public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0, $jmlhalaman = 0, $waktumain= 0){
+				$this->judul = $judul;
+				$this->penulis = $penulis;
+				$this->penerbit = $penerbit;
+				$this->harga = $harga;
+				$this->jmlhalaman = $jmlhalaman;
+				$this->waktumain = $waktumain;
+				
+		}
+
+		public function getLabel(){
+			return "$this->penulis,$this->penerbit";
+		}
+
+			public function getInfoProduk(){
+			// komik : Naruto | masashi kishimoto,shonen jump (Rp.30000) - 100 halaman
+			$str = "{$this->judul} | {$this->getLabel()} (Rp. {$this->harga})"; 
+			
+			return $str;
+		}
+		
+}
+
+	class komik extends Produk{
+		public function getInfoProduk(){
+			$str = " komik : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga}) {$this->jmlhalaman} halaman.";
+			return $str; 
+		}
+
+	}
+
+	class game extends Produk{
+		public function getInfoProduk(){
+			$str = " game : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga}) {$this->waktumain} jam.";
+			return $str;
+		}
+	}
+
+
+
+	class CetakInfoProduk{
+		public function cetak( Produk $Produk ){
+			$str = "{$Produk->judul} | {$Produk->getLabel()} (Rp. {$Produk->harga})";
+			return $str;
+		}
+	}
+
+
+		$Produk1 = new Komik("naruto", "masashi kishimoto", "shonen jump", 30000,100,0);
+		$Produk2 = new Game("uncharted", "neil druckman", "sony computer", 25000,0, 50);
+		
+		echo $Produk1->getInfoProduk();
+		echo"<br>";
+		echo $Produk2->getInfoProduk();
+		
+ ?>
